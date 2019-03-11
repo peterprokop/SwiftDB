@@ -9,7 +9,8 @@
 import Foundation
 
 enum Statement {
-    case insert
+    // TODO: should handle insert in general case
+    case insert(id: Int, name: String, email: String)
     case select
 }
 
@@ -26,14 +27,42 @@ func executeMetaCommand(input: String) -> Bool {
     }
 }
 
-func prepareStatement(input: String) -> Statement? {
-    if input.starts(with: "insert") {
-        return .insert
-    } else if input.starts(with: "select") {
-        return .select
+enum PrepareStatementError: Error {
+    case parse
+    case insertWrongArguments
+    case unknownStatement
+}
+
+func prepareStatement(input: String) throws -> Statement {
+    let tokens = input.split(separator: " ", maxSplits: 65536, omittingEmptySubsequences: true)
+    guard let statementWord = tokens.first else {
+        throw PrepareStatementError.parse
     }
 
-    return nil
+    switch statementWord {
+    case "insert":
+        guard
+            tokens.count == 4,
+            let id = Int(tokens[1])
+        else {
+            throw PrepareStatementError.insertWrongArguments
+        }
+
+        let name = tokens[2]
+        let email = tokens[3]
+        guard
+            name.count < 32,
+            email.count < 256
+        else {
+            throw PrepareStatementError.insertWrongArguments
+        }
+
+        return .insert(id: id, name: String(name), email: String(email))
+    case "select":
+        return .select
+    default:
+        throw PrepareStatementError.unknownStatement
+    }
 }
 
 func execute(statement: Statement) {
@@ -58,10 +87,11 @@ while true {
         continue
     }
 
-    if let statement = prepareStatement(input: input) {
+    do {
+        let statement = try prepareStatement(input: input)
         execute(statement: statement)
-    } else {
-        print("Statement not recognized:", input)
     }
-
+    catch {
+        print("Statement error:", error)
+    }
 }
