@@ -8,9 +8,47 @@
 
 import Foundation
 
+struct Row {
+    let id: Int32
+    let name: String
+    let email: String
+
+    static let idOffset = 0
+    static let nameOffset = 4
+    static let emailOffset = 36
+
+    static let total = 292
+}
+
+func serialize(row: Row, destination: UnsafeMutableRawPointer) {
+    destination.initializeMemory(as: UInt8.self, repeating: 0, count: Row.total)
+
+    withUnsafePointer(to: row.id) { (ptr) -> Void in
+        destination.copyMemory(from: ptr, byteCount: 4)
+    }
+
+    copyMemory(from: row.name.utf8CString, to: destination, startingIndex: Row.nameOffset)
+    copyMemory(from: row.email.utf8CString, to: destination, startingIndex: Row.emailOffset)
+}
+
+func deserialize(source: UnsafeMutableRawPointer) -> Row {
+    let id = source.load(as: Int32.self)
+
+    // TODO: this fails to deserialize some strings like "mañana" properly
+    let namePtr = source.advanced(by: Row.nameOffset).bindMemory(to: UInt8.self, capacity: 32)
+    let nameBufPtr = UnsafeBufferPointer.init(start: namePtr, count: 32)
+    let nameStr = String(bytes: nameBufPtr, encoding: .utf8)!
+
+    let emailPtr = source.advanced(by: Row.emailOffset).bindMemory(to: UInt8.self, capacity: 256)
+    let emailBufPtr = UnsafeBufferPointer.init(start: emailPtr, count: 256)
+    let emailStr = String(bytes: emailBufPtr, encoding: .utf8)!
+
+    return Row(id: id, name: nameStr, email: emailStr)
+}
+
 enum Statement {
     // TODO: should handle insert in general case
-    case insert(id: Int, name: String, email: String)
+    case insert(row: Row)
     case select
 }
 
@@ -43,7 +81,7 @@ func prepareStatement(input: String) throws -> Statement {
     case "insert":
         guard
             tokens.count == 4,
-            let id = Int(tokens[1])
+            let id = Int32(tokens[1])
         else {
             throw PrepareStatementError.insertWrongArguments
         }
@@ -57,7 +95,23 @@ func prepareStatement(input: String) throws -> Statement {
             throw PrepareStatementError.insertWrongArguments
         }
 
-        return .insert(id: id, name: String(name), email: String(email))
+        let row = Row(id: id, name: String(name), email: String(email))
+        let bytesPointer = UnsafeMutableRawPointer.allocate(
+            byteCount: Row.total,
+            alignment: MemoryLayout<UInt8>.alignment
+        )
+        defer {
+            bytesPointer.deallocate()
+        }
+
+        serialize(row: row, destination: bytesPointer)
+
+        let r2 = deserialize(source: bytesPointer)
+        print(r2.id)
+        print(r2.name)
+        print(r2.email)
+
+        return .insert(row: row)
     case "select":
         return .select
     default:
