@@ -34,14 +34,11 @@ func serialize(row: Row, destination: UnsafeMutableRawPointer) {
 func deserialize(source: UnsafeMutableRawPointer) -> Row {
     let id = source.load(as: Int32.self)
 
-    // TODO: this fails to deserialize some strings like "mañana" properly
     let namePtr = source.advanced(by: Row.nameOffset).bindMemory(to: UInt8.self, capacity: 32)
-    let nameBufPtr = UnsafeBufferPointer.init(start: namePtr, count: 32)
-    let nameStr = String(bytes: nameBufPtr, encoding: .utf8)!
+    let nameStr = String(cString: namePtr)
 
     let emailPtr = source.advanced(by: Row.emailOffset).bindMemory(to: UInt8.self, capacity: 256)
-    let emailBufPtr = UnsafeBufferPointer.init(start: emailPtr, count: 256)
-    let emailStr = String(bytes: emailBufPtr, encoding: .utf8)!
+    let emailStr = String(cString: emailPtr)
 
     return Row(id: id, name: nameStr, email: emailStr)
 }
@@ -96,21 +93,6 @@ func prepareStatement(input: String) throws -> Statement {
         }
 
         let row = Row(id: id, name: String(name), email: String(email))
-        let bytesPointer = UnsafeMutableRawPointer.allocate(
-            byteCount: Row.total,
-            alignment: MemoryLayout<UInt8>.alignment
-        )
-        defer {
-            bytesPointer.deallocate()
-        }
-
-        serialize(row: row, destination: bytesPointer)
-
-        let r2 = deserialize(source: bytesPointer)
-        print(r2.id)
-        print(r2.name)
-        print(r2.email)
-
         return .insert(row: row)
     case "select":
         return .select
@@ -119,14 +101,42 @@ func prepareStatement(input: String) throws -> Statement {
     }
 }
 
-func execute(statement: Statement) {
+enum ExecuteStatementError: Error {
+    case tableFull
+}
+
+func executeInsert(row: Row, table: Table) throws {
+    if table.numberOfRows >= Table.maxRows {
+        throw ExecuteStatementError.tableFull
+    }
+    serialize(row: row, destination: table.rowSlot(rowNum: UInt32(table.numberOfRows)))
+    table.numberOfRows += 1
+}
+
+func executeSelect(table: Table) {
+    for i in 0 ..< table.numberOfRows {
+        let row = deserialize(source: table.rowSlot(rowNum: UInt32(i)))
+        print(row)
+    }
+}
+
+func execute(statement: Statement, table: Table) {
     switch statement {
     case .select:
         print("Executing select")
-    case .insert:
+        executeSelect(table: table)
+    case .insert(let row):
         print("Executing insert")
+        do {
+            try executeInsert(row: row, table: table)
+        }
+        catch {
+            print(error)
+        }
     }
 }
+
+let table = Table()
 
 while true {
     printPrompt()
@@ -143,7 +153,7 @@ while true {
 
     do {
         let statement = try prepareStatement(input: input)
-        execute(statement: statement)
+        execute(statement: statement, table: table)
     }
     catch {
         print("Statement error:", error)
