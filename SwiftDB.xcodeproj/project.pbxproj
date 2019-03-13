@@ -8,9 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		2F60F16D22363F33001ED289 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F60F16C22363F33001ED289 /* main.swift */; };
+		2F65D87422394D090062CAF0 /* SwiftDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F65D86B22394D080062CAF0 /* SwiftDB.framework */; };
+		2F65D87922394D090062CAF0 /* SwiftDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F65D87822394D090062CAF0 /* SwiftDBTests.swift */; };
+		2F65D87B22394D090062CAF0 /* SwiftDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 2F65D86D22394D080062CAF0 /* SwiftDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2FBE7BE12237C7BE00B02C61 /* MemoryCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBE7BE02237C7BE00B02C61 /* MemoryCopy.swift */; };
 		2FBE7BEC223824C200B02C61 /* MemoryPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBE7BEB223824C200B02C61 /* MemoryPage.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2F65D87522394D090062CAF0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2F60F16122363F33001ED289 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2F65D86A22394D080062CAF0;
+			remoteInfo = SwiftDB;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		2F60F16722363F33001ED289 /* CopyFiles */ = {
@@ -25,8 +38,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2F60F16922363F33001ED289 /* SwiftDB */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftDB; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F60F16922363F33001ED289 /* SwiftDBREPL */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftDBREPL; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F60F16C22363F33001ED289 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		2F65D86B22394D080062CAF0 /* SwiftDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F65D86D22394D080062CAF0 /* SwiftDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftDB.h; sourceTree = "<group>"; };
+		2F65D86E22394D080062CAF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F65D87322394D090062CAF0 /* SwiftDBTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftDBTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F65D87822394D090062CAF0 /* SwiftDBTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDBTests.swift; sourceTree = "<group>"; };
+		2F65D87A22394D090062CAF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FBE7BE02237C7BE00B02C61 /* MemoryCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCopy.swift; sourceTree = "<group>"; };
 		2FBE7BEB223824C200B02C61 /* MemoryPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -39,13 +58,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2F65D86822394D080062CAF0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F65D87022394D080062CAF0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F65D87422394D090062CAF0 /* SwiftDB.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		2F60F16022363F33001ED289 = {
 			isa = PBXGroup;
 			children = (
-				2F60F16B22363F33001ED289 /* SwiftDB */,
+				2F60F16B22363F33001ED289 /* SwiftDBREPL */,
+				2F65D86C22394D080062CAF0 /* SwiftDB */,
+				2F65D87722394D090062CAF0 /* SwiftDBTests */,
 				2F60F16A22363F33001ED289 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,27 +89,58 @@
 		2F60F16A22363F33001ED289 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2F60F16922363F33001ED289 /* SwiftDB */,
+				2F60F16922363F33001ED289 /* SwiftDBREPL */,
+				2F65D86B22394D080062CAF0 /* SwiftDB.framework */,
+				2F65D87322394D090062CAF0 /* SwiftDBTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2F60F16B22363F33001ED289 /* SwiftDB */ = {
+		2F60F16B22363F33001ED289 /* SwiftDBREPL */ = {
 			isa = PBXGroup;
 			children = (
 				2F60F16C22363F33001ED289 /* main.swift */,
 				2FBE7BE02237C7BE00B02C61 /* MemoryCopy.swift */,
 				2FBE7BEB223824C200B02C61 /* MemoryPage.swift */,
 			);
+			path = SwiftDBREPL;
+			sourceTree = "<group>";
+		};
+		2F65D86C22394D080062CAF0 /* SwiftDB */ = {
+			isa = PBXGroup;
+			children = (
+				2F65D86D22394D080062CAF0 /* SwiftDB.h */,
+				2F65D86E22394D080062CAF0 /* Info.plist */,
+			);
 			path = SwiftDB;
+			sourceTree = "<group>";
+		};
+		2F65D87722394D090062CAF0 /* SwiftDBTests */ = {
+			isa = PBXGroup;
+			children = (
+				2F65D87822394D090062CAF0 /* SwiftDBTests.swift */,
+				2F65D87A22394D090062CAF0 /* Info.plist */,
+			);
+			path = SwiftDBTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		2F65D86622394D080062CAF0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F65D87B22394D090062CAF0 /* SwiftDB.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		2F60F16822363F33001ED289 /* SwiftDB */ = {
+		2F60F16822363F33001ED289 /* SwiftDBREPL */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2F60F17022363F33001ED289 /* Build configuration list for PBXNativeTarget "SwiftDB" */;
+			buildConfigurationList = 2F60F17022363F33001ED289 /* Build configuration list for PBXNativeTarget "SwiftDBREPL" */;
 			buildPhases = (
 				2F60F16522363F33001ED289 /* Sources */,
 				2F60F16622363F33001ED289 /* Frameworks */,
@@ -83,10 +150,46 @@
 			);
 			dependencies = (
 			);
+			name = SwiftDBREPL;
+			productName = SwiftDB;
+			productReference = 2F60F16922363F33001ED289 /* SwiftDBREPL */;
+			productType = "com.apple.product-type.tool";
+		};
+		2F65D86A22394D080062CAF0 /* SwiftDB */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F65D87C22394D090062CAF0 /* Build configuration list for PBXNativeTarget "SwiftDB" */;
+			buildPhases = (
+				2F65D86622394D080062CAF0 /* Headers */,
+				2F65D86722394D080062CAF0 /* Sources */,
+				2F65D86822394D080062CAF0 /* Frameworks */,
+				2F65D86922394D080062CAF0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
 			name = SwiftDB;
 			productName = SwiftDB;
-			productReference = 2F60F16922363F33001ED289 /* SwiftDB */;
-			productType = "com.apple.product-type.tool";
+			productReference = 2F65D86B22394D080062CAF0 /* SwiftDB.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		2F65D87222394D080062CAF0 /* SwiftDBTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F65D87F22394D090062CAF0 /* Build configuration list for PBXNativeTarget "SwiftDBTests" */;
+			buildPhases = (
+				2F65D86F22394D080062CAF0 /* Sources */,
+				2F65D87022394D080062CAF0 /* Frameworks */,
+				2F65D87122394D080062CAF0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2F65D87622394D090062CAF0 /* PBXTargetDependency */,
+			);
+			name = SwiftDBTests;
+			productName = SwiftDBTests;
+			productReference = 2F65D87322394D090062CAF0 /* SwiftDBTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -99,6 +202,12 @@
 				ORGANIZATIONNAME = "Pete Prokop";
 				TargetAttributes = {
 					2F60F16822363F33001ED289 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					2F65D86A22394D080062CAF0 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					2F65D87222394D080062CAF0 = {
 						CreatedOnToolsVersion = 10.1;
 					};
 				};
@@ -115,10 +224,29 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2F60F16822363F33001ED289 /* SwiftDB */,
+				2F60F16822363F33001ED289 /* SwiftDBREPL */,
+				2F65D86A22394D080062CAF0 /* SwiftDB */,
+				2F65D87222394D080062CAF0 /* SwiftDBTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2F65D86922394D080062CAF0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F65D87122394D080062CAF0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2F60F16522363F33001ED289 /* Sources */ = {
@@ -131,7 +259,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2F65D86722394D080062CAF0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F65D86F22394D080062CAF0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F65D87922394D090062CAF0 /* SwiftDBTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2F65D87622394D090062CAF0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2F65D86A22394D080062CAF0 /* SwiftDB */;
+			targetProxy = 2F65D87522394D090062CAF0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		2F60F16E22363F33001ED289 /* Debug */ = {
@@ -269,6 +420,100 @@
 			};
 			name = Release;
 		};
+		2F65D87D22394D090062CAF0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 97H7M775CZ;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = SwiftDB/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Prokop.SwiftDB;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		2F65D87E22394D090062CAF0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 97H7M775CZ;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = SwiftDB/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Prokop.SwiftDB;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		2F65D88022394D090062CAF0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 97H7M775CZ;
+				INFOPLIST_FILE = SwiftDBTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Prokop.SwiftDBTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		2F65D88122394D090062CAF0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 97H7M775CZ;
+				INFOPLIST_FILE = SwiftDBTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Prokop.SwiftDBTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -281,11 +526,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2F60F17022363F33001ED289 /* Build configuration list for PBXNativeTarget "SwiftDB" */ = {
+		2F60F17022363F33001ED289 /* Build configuration list for PBXNativeTarget "SwiftDBREPL" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2F60F17122363F33001ED289 /* Debug */,
 				2F60F17222363F33001ED289 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2F65D87C22394D090062CAF0 /* Build configuration list for PBXNativeTarget "SwiftDB" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F65D87D22394D090062CAF0 /* Debug */,
+				2F65D87E22394D090062CAF0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2F65D87F22394D090062CAF0 /* Build configuration list for PBXNativeTarget "SwiftDBTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F65D88022394D090062CAF0 /* Debug */,
+				2F65D88122394D090062CAF0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
