@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Table {
+public class Table {
     static let pageSize: UInt32 = 4096
     static let maxPages: UInt32 = 128
     static let rowsPerPage: UInt32 = pageSize / UInt32(Row.total)
@@ -16,6 +16,8 @@ class Table {
 
     var pages: [UnsafeMutableRawPointer] = []
     var numberOfRows = 0
+
+    public init() {}
 
     func rowSlot(rowNum: UInt32) -> UnsafeMutableRawPointer {
         let pageNum = rowNum / Table.rowsPerPage
